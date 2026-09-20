@@ -8,7 +8,11 @@
 
 ## To Create release DLL's and .lib
 
-* LibreHardwareMonitor and other dependencies should be automatically installed with NuGet
+* LibreHardwareMonitor (currently 0.9.6, which no longer ships the WinRing0 driver) and other dependencies are restored automatically with NuGet (`PackageReference`). Use `msbuild -restore` or build from Visual Studio 2022.
+
+* LibreHardwareMonitorLib 0.9.6+ ships its DLL only under `runtimes\win-x64`; Exporter.csproj copies it explicitly, and CPPdll post-build copies all Exporter dependencies to the output folder (x64 Release only).
+
+* Some sensors on some CPUs need the separate [PawnIO](https://pawnio.eu) driver installed.
 
 1. Open solution with Visual Studio 2022
 
@@ -16,4 +20,4 @@
 
 3. Build CPPdll
 
-* For building btop4win LHM version, copy all ".dll" and ".lib" from "x64\Release" to "external" folder in top-level of [btop4win](https://github.com/aristocratos/btop4win).
+* For building btop4win LHM version, copy all ".dll" and ".lib" from "x64\Release" (all of them, including LibreHardwareMonitorLib.dll and its dependencies) to "external" folder in top-level of [btop4win](https://github.com/aristocratos/btop4win).
